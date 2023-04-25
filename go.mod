@@ -1,4 +1,4 @@
-module github.com/Promacanthus/put
+module github.com/promacanthus/put
 
 go 1.20
 

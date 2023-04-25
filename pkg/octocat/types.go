@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Promacanthus/put/pkg/sparrow"
+	"github.com/promacanthus/put/pkg/sparrow"
 )
 
 const (

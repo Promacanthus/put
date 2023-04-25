@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Promacanthus/put/pkg/octocat"
-	"github.com/Promacanthus/put/pkg/pointer"
-	"github.com/Promacanthus/put/pkg/sparrow"
 	"github.com/google/go-github/v52/github"
+	"github.com/promacanthus/put/pkg/octocat"
+	"github.com/promacanthus/put/pkg/pointer"
+	"github.com/promacanthus/put/pkg/sparrow"
 )
 
 const (

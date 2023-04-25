@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Promacanthus/put/pkg/put"
+	"github.com/promacanthus/put/pkg/put"
 )
 
 func main() {
