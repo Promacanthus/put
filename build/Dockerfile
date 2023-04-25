@@ -1,4 +1,4 @@
-FROM docker-reg.devops.xiaohongshu.com/shequ/golang:1.19.2 as builder
+FROM golang:1.19.2 as builder
 
 COPY . .
 
@@ -7,7 +7,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o put cmd/
 
 # Use distroless as minimal base image to package the manager binary
 # Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM docker-reg.devops.xiaohongshu.com/shequ/alpine-3.13:tz
+FROM alpine-3.13:tz
 
 WORKDIR /workspace
 
