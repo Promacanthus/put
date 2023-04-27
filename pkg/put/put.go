@@ -4,14 +4,15 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
 	"os"
 
 	"github.com/google/go-github/v52/github"
+	"github.com/promacanthus/put/pkg/log"
 	"github.com/promacanthus/put/pkg/octocat"
 	"github.com/promacanthus/put/pkg/pointer"
 	"github.com/promacanthus/put/pkg/sparrow"
+	"go.uber.org/zap"
 )
 
 const (
@@ -29,11 +30,11 @@ type Server struct {
 func NewServer() *Server {
 	owner := os.Getenv("GITHUB_OWNER")
 	if len(owner) == 0 {
-		log.Fatal("Set github owner into GITHUB_OWNER")
+		log.Logger.Fatal("Set github owner into GITHUB_OWNER")
 	}
 	token := os.Getenv("GITHUB_AUTH_TOKEN")
 	if len(token) == 0 {
-		log.Fatal("Unauthorized: No token present")
+		log.Logger.Fatal("Unauthorized: No token present")
 	}
 	client := github.NewTokenClient(context.Background(), token)
 	return &Server{
@@ -57,6 +58,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	log.Logger.Info("The yuque webhook request", zap.Any("payload", payload))
 
 	doc := octocat.NewDocument(payload.Data)
 	_, resp, err := s.client.Repositories.Get(ctx, s.owner, doc.Repository)

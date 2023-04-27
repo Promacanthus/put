@@ -1,16 +1,19 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
+	"github.com/promacanthus/put/pkg/log"
 	"github.com/promacanthus/put/pkg/put"
+	"go.uber.org/zap"
 )
 
 func main() {
+	defer log.Logger.Sync()
+
 	http.Handle("/webhook", put.NewServer())
-	log.Println("Webhook Server started on port 8080...")
+	log.Logger.Info("Webhook Server started on port 8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatalf("Running Webhook Server failed, err: %v", err)
+		log.Logger.Fatal("Running Webhook Server failed, err: %v", zap.Error(err))
 	}
 }
